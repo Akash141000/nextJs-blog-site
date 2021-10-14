@@ -1,9 +1,9 @@
-import { Post } from "../../utils/types";
 import PostItem from "./post-item";
 import React from "react";
+import { IPost } from "../../lib/posts-util";
 
 interface IPostGridProps {
-  posts: Post[];
+  posts: IPost[];
 }
 
 const PostsGrid:React.FC<IPostGridProps> = (props) => {

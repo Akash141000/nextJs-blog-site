@@ -1,8 +1,8 @@
-import { Post } from "../../utils/types";
+import { IPost } from "../../lib/posts-util";
 import PostsGrid from "../Posts/posts-grid";
 
 interface IFeaturedPosts {
-  posts: Post[];
+  posts: IPost[];
 }
 
 const FeaturedPosts = (props: IFeaturedPosts) => {

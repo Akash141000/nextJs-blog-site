@@ -2,11 +2,11 @@ import Link from "next/link";
 import Image from "next/image";
 import React from "react";
 import { NextComponentType } from "next";
-import { Post } from "../../utils/types";
 import styles from "./post-item.module.css";
+import { IPost } from "../../lib/posts-util";
 
 interface IPostItemProps {
-  post: Post;
+  post: IPost;
 }
 
 const PostItem = (props: IPostItemProps) => {

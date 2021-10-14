@@ -4,6 +4,7 @@
     width: 20rem;
     height: 25rem;
     margin: 1rem;
-    border: 1px solid;
+    border: 1px solid white;
     display: inline-block;
+    background-color: #66F6F1;
 }

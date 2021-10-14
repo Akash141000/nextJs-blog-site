@@ -4,7 +4,9 @@ module.exports = {
   theme: {
     colors: {
       'electric-blue': "#66F6F1",
+      'black-color':'#000000',
     },
+    extend:{},
   },
   variants: {
     extend: {},

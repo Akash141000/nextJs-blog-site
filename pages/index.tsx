@@ -5,7 +5,7 @@ import Main from "../components/UI/main";
 import styles from "../styles/Home.module.css";
 import { Post } from "../utils/types";
 
-const DUMMY_POSTS: Post[] = [
+export const DUMMY_POSTS: Post[] = [
   {
     slug: "getting-started with nextJs",
     title: "Nextjs",

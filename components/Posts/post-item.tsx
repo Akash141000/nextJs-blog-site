@@ -34,12 +34,12 @@ const PostItem = (props: IPostItemProps) => {
               layout="responsive"
             />
           </div>
-          <div className="p-4">
+          <div className="p-4bg-electric-blue text-black-color">
             <h3 className="text-center text-2xl font-bold m-1">{title}</h3>
             <div className="text-center italic m-1">
               <time>{formattedDate}</time>
             </div>
-            <p>{excerpt}</p>
+            <p className="p-1">{excerpt}</p>
           </div>
         </a>
       </Link>

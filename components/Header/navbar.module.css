@@ -1,0 +1,29 @@
+.header{
+    display:flex;
+    flex-flow: row nowrap;
+    width: 100%;
+    height: 5rem;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    color: #66F6F1;
+    position:absolute;
+    z-index: 100;
+    border-bottom: 1px solid rgba(197,198,199,0.9);
+}
+
+
+.header ul{
+    list-style: none;
+}
+
+.header ul li{
+    display: inline-block;
+    margin: 2rem;
+    font-size: larger;
+}
+
+.title{
+    font-size:xx-large;
+    margin: 1rem;
+}

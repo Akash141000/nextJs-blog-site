@@ -1,0 +1,9 @@
+.item{
+    display:flex;
+    flex-flow: column nowrap;
+    width: 20rem;
+    height: 25rem;
+    margin: 1rem;
+    border: 1px solid;
+    display: inline-block;
+}

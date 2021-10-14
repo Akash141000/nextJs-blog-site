@@ -1,0 +1,27 @@
+.main {
+  height: 100vh;
+  width: 100%;
+  z-index: 50;
+  position: absolute;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.main * {
+  color: #66f6f1;
+}
+
+/* @media screen and (min-width: 700px) {
+  .main {
+    height: 100vh;
+    width: 100%;
+    z-index: 50;
+    position: absolute;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+  }
+} */

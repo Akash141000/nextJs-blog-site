@@ -11,6 +11,7 @@ export interface IPost {
   date: string;
   excerpt: string;
   isFeatured?: boolean;
+  content:string;
 }
 
 export const getPostData = (fileIdentifier: string) => {

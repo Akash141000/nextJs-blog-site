@@ -1,5 +1,6 @@
 import PostHeader from "./post-header";
 import ReactMarkdown from "react-markdown";
+import { IPost } from "../../../lib/posts-util";
 
 const DUMMY_POST = {
   slug: "getting-started with nextJs3",
@@ -9,13 +10,13 @@ const DUMMY_POST = {
   content: "# This is a first post",
 };
 
-const PostContent: React.FC = () => {
+const PostContent: React.FC<{ post: IPost }> = (props) => {
   const imagePath = `/images/posts/${DUMMY_POST.slug}/${DUMMY_POST.image}`;
 
   return (
     <article className="text-center">
-      <PostHeader title={DUMMY_POST.title} image={imagePath} />
-      <ReactMarkdown className="text-xl">{DUMMY_POST.content}</ReactMarkdown>
+      <PostHeader title={props.post.title} image={imagePath} />
+      <ReactMarkdown className="text-xl">{props.post.content}</ReactMarkdown>
     </article>
   );
 };

@@ -12,7 +12,7 @@ const PostHeader: React.FC<IPageHeader> = (props) => {
 
   return (
     <header>
-      <h1 className="text-5xl">{title}</h1>
+      <h1 className="text-5xl my-2">{title}</h1>
       <Image src={image} alt={title} width={400} height={200} />
     </header>
   );

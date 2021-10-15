@@ -1,4 +1,4 @@
-import React, { FormEventHandler, useRef } from "react";
+import React, { FormEventHandler, useRef, useState } from "react";
 
 const ContactForm = () => {
   const emailRef = useRef(null);
@@ -17,6 +17,12 @@ const ContactForm = () => {
       headers: {
         "Content-Type": "application/json",
       },
+    }).then((result) => {
+      if (result.status === 201) {
+        alert("Response saved successfully");
+      } else if (result.status === 404 || 500) {
+        alert("Something went wrong!");
+      }
     });
   };
 

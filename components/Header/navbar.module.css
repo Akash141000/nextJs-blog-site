@@ -8,7 +8,7 @@
     padding: 1rem;
     color: #66F6F1;
     background-color:black;
-    position:absolute;
+    position:fixed;
     z-index: 100;
     border-bottom: 1px solid rgba(197,198,199,0.9);
 }

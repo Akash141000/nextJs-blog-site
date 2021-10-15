@@ -3,7 +3,7 @@
   width: 100%;
   background-image: url("/img-background.jpg");
   background-repeat: no-repeat;
-  background-size:100% 100%;
+  background-size:100% 80%;
   z-index: 1;
   filter: blur(3px);
   position: absolute;

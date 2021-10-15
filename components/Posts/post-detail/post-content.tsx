@@ -7,10 +7,10 @@ const PostContent: React.FC<{ post: IPost }> = (props) => {
   const imagePath = `/images/posts/${props.post.slug}/${props.post.image}`;
 
   // const renderers: Components = {
-  //   ul: (node,...props) => {
+  //   ul: (node, ...props) => {
   //     return (
   //       <ul className="list-disc m-5" {...props}>
-  //         {node.children}
+  //         {node}
   //       </ul>
   //     );
   //   },

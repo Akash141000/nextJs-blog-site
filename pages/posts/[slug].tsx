@@ -1,4 +1,5 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
+import Head from "next/dist/shared/lib/head";
 import PostContent from "../../components/Posts/post-detail/post-content";
 import { getAllPostsNames, getPostData, IPost } from "../../lib/posts-util";
 import styles from "../../styles/PostDetail.module.css";
@@ -6,11 +7,17 @@ import { IPath } from "../../utils/types";
 
 const PostDetailPage: NextPage<{ postData: IPost }> = (props) => {
   return (
-    <div className={styles.main}>
-      <div className={styles.detail}>
-        <PostContent post={props.postData} />
+    <>
+      <Head>
+        <title>{props.postData.title}</title>
+        <meta name="description" content={props.postData.excerpt} />
+      </Head>
+      <div className={styles.main}>
+        <div className={styles.detail}>
+          <PostContent post={props.postData} />
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
@@ -35,7 +42,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
     props: {
       postData,
     },
-    revalidate: 1,
   };
 };
 

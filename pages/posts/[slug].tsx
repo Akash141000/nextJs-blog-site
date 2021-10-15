@@ -1,7 +1,8 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import PostContent from "../../components/Posts/post-detail/post-content";
-import { getPostData, IPost } from "../../lib/posts-util";
+import { getAllPostsNames, getPostData, IPost } from "../../lib/posts-util";
 import styles from "../../styles/PostDetail.module.css";
+import { IPath } from "../../utils/types";
 
 const PostDetailPage: NextPage<{ postData: IPost }> = (props) => {
   return (
@@ -14,9 +15,15 @@ const PostDetailPage: NextPage<{ postData: IPost }> = (props) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
+  const postFiles = getAllPostsNames();
+  const paths: IPath[] = postFiles.map((fileName) => ({
+    params: {
+      slug: fileName,
+    },
+  }));
   return {
-    paths: [{ params: { slug: "getting-started with nextJs" } }],
-    fallback: "blocking",
+    paths: paths,
+    fallback: true,
   };
 };
 

@@ -7,12 +7,21 @@ const postsDirectory = path.join(process.cwd(), "posts");
 export interface IPost {
   title: string;
   image: string;
-  slug: string;
+  slug?: string;
   date: string;
   excerpt: string;
   isFeatured?: boolean;
-  content:string;
+  content: string;
 }
+
+export const getAllPostsNames = (): string[] => {
+  const postFiles = fs.readdirSync(postsDirectory);
+  if (!postFiles) {
+    console.log("No posts found!");
+    return [];
+  }
+  return postFiles;
+};
 
 export const getPostData = (fileIdentifier: string) => {
   const postSlug = fileIdentifier.replace(/\.md$/, "");
@@ -29,11 +38,7 @@ export const getPostData = (fileIdentifier: string) => {
 };
 
 export const getAllPosts = (): IPost[] | void => {
-  const postFiles = fs.readdirSync(postsDirectory);
-  if (!postFiles) {
-    console.log("No posts found!");
-    return;
-  }
+  const postFiles = getAllPostsNames();
   const allPosts = postFiles.map((postFile) => {
     return getPostData(postFile);
   });

@@ -39,7 +39,7 @@ const PostItem = (props: IPostItemProps) => {
             <div className="text-center italic m-1">
               <time>{formattedDate}</time>
             </div>
-            <p className="p-1">{excerpt}</p>
+            <p className="p-1">{excerpt.substring(0,60) + '...'}</p>
           </div>
         </a>
       </Link>

@@ -18,12 +18,12 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const postFiles = getAllPostsNames();
   const paths: IPath[] = postFiles.map((fileName) => ({
     params: {
-      slug: fileName,
+      slug: fileName.replace(/\.md$/, ""),
     },
   }));
   return {
     paths: paths,
-    fallback: true,
+    fallback: false,
   };
 };
 

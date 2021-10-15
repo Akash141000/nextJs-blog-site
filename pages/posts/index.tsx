@@ -1,5 +1,3 @@
-import Main from "../../components/UI/main";
-import Layout from "../../components/UI/layout";
 import PostsGrid from "../../components/Posts/posts-grid";
 import styles from "../../styles/AllPosts.module.css";
 import { GetStaticProps, NextPage } from "next";

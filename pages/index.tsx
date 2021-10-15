@@ -1,7 +1,6 @@
 import type { GetStaticProps, NextPage } from "next";
 import FeaturedPosts from "../components/Home-Page/featured-posts";
 import Layout from "../components/UI/layout";
-import Main from "../components/UI/main";
 import { getFeaturedPosts, IPost } from "../lib/posts-util";
 import styles from "../styles/Home.module.css";
 import Head from "next/dist/shared/lib/head";

@@ -14,9 +14,9 @@ const PostContent: React.FC<{ post: IPost }> = (props) => {
   const imagePath = `/images/posts/${DUMMY_POST.slug}/${DUMMY_POST.image}`;
 
   return (
-    <article className="text-center">
-      <PostHeader title={props.post.title} image={imagePath} />
-      <ReactMarkdown className="text-xl">{props.post.content}</ReactMarkdown>
+    <article>
+      <PostHeader  title={props.post.title} image={imagePath} />
+      <ReactMarkdown className="text-2xl px-4 my-4 list-disc space-y-4">{props.post.content}</ReactMarkdown>
     </article>
   );
 };

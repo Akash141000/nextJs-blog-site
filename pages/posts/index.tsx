@@ -5,18 +5,18 @@ import styles from "../../styles/AllPosts.module.css";
 import { GetStaticProps, NextPage } from "next";
 import { getFeaturedPosts, IPost } from "../../lib/posts-util";
 
-const AllPosts: NextPage<{posts:IPost[]}> = (props) => {
+const AllPosts: NextPage<{ posts: IPost[] }> = (props) => {
   return (
-    <>
-      <div className="z-1 absolute flex flex-column w-full h-screen bg-black-color">
-        <div className={styles.main}>
-          <div className="text-6xl font-bold py-10  text-center">All Posts</div>
-          <div>
-            <PostsGrid posts={props.posts}></PostsGrid>
-          </div>
+    <div className={styles.bg}>
+      <div className={styles.main}>
+        <div className="text-6xl relative z-10 font-bold py-10  text-center">
+          All Posts
+        </div>
+        <div>
+          <PostsGrid posts={props.posts}></PostsGrid>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
@@ -29,6 +29,5 @@ export const getStaticProps: GetStaticProps = async (context) => {
     revalidate: 10,
   };
 };
-
 
 export default AllPosts;

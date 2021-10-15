@@ -1,11 +1,14 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import PostContent from "../../components/Posts/post-detail/post-content";
 import { getPostData, IPost } from "../../lib/posts-util";
+import styles from "../../styles/PostDetail.module.css";
 
 const PostDetailPage: NextPage<{ postData: IPost }> = (props) => {
   return (
-    <div className="flex flex-col py-28 items-center w-full h-screen bg-black-color text-electric-blue">
-      <PostContent post={props.postData} />
+    <div className={styles.main}>
+      <div className={styles.detail}>
+        <PostContent post={props.postData} />
+      </div>
     </div>
   );
 };
@@ -25,7 +28,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
     props: {
       postData,
     },
-    revalidate: 600,
+    revalidate: 1,
   };
 };
 

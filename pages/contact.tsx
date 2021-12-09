@@ -1,6 +1,5 @@
 import { NextPage } from "next";
 import ContactForm from "../components/Contact/contact-form";
-import Main from "../components/UI/main";
 
 const ContactPage: NextPage = () => {
   return (

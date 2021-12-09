@@ -1,4 +1,4 @@
-import { IPost } from "../../lib/posts-util";
+import { IPost } from "../../utils/types";
 import PostsGrid from "../Posts/posts-grid";
 
 interface IFeaturedPosts {

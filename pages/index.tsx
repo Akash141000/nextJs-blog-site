@@ -1,9 +1,9 @@
 import type { GetStaticProps, NextPage } from "next";
 import FeaturedPosts from "../components/Home-Page/featured-posts";
 import Layout from "../components/UI/layout";
-import Main from "../components/UI/main";
-import { getFeaturedPosts, IPost } from "../lib/posts-util";
+import { getFeaturedPosts } from "../lib/posts-util";
 import styles from "../styles/Home.module.css";
+import { IPost } from "../utils/types";
 
 
 const Home: NextPage<{posts:IPost[]}> = (props) => {
@@ -30,7 +30,7 @@ const Home: NextPage<{posts:IPost[]}> = (props) => {
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  const featuredPosts = getFeaturedPosts();
+  const featuredPosts = await getFeaturedPosts();
   return {
     props: {
       posts: featuredPosts,

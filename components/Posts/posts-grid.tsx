@@ -1,6 +1,6 @@
 import PostItem from "./post-item";
 import React from "react";
-import { IPost } from "../../lib/posts-util";
+import { IPost } from "../../utils/types";
 
 interface IPostGridProps {
   posts: IPost[];

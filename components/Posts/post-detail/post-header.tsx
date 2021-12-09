@@ -1,4 +1,3 @@
-import { NextComponentType } from "next";
 
 import Image from "next/image";
 

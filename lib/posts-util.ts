@@ -1,42 +1,71 @@
-import fs from "fs";
-import path from "path";
+import https from "https";
 import matter from "gray-matter";
+import { FirebaseOptions, initializeApp } from "firebase/app";
+import { getDownloadURL, getStorage, ref, listAll } from "firebase/storage";
+import { IPost, PostName, } from "../utils/types";
 
-const postsDirectory = path.join(process.cwd(), "posts");
+const config: FirebaseOptions = {
+  apiKey: process.env.FIREBASE_API_KEY,
+  authDomain: process.env.FIREBASE_AUTH_DOMAIN,
+  databaseURL: process.env.FIREBASE_DATABASE_URL,
+  storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
+};
+const firebaseApp = initializeApp(config);
+const storage = getStorage(firebaseApp);
+const blogpostRef = ref(storage, "Blogs");
+const blogcoverimgRef = ref(storage, "Blog-cover-img/");
 
-export interface IPost {
-  title: string;
-  image: string;
-  slug: string;
-  date: string;
-  excerpt: string;
-  isFeatured?: boolean;
-  content:string;
-}
-
-export const getPostData = (fileIdentifier: string) => {
-  const postSlug = fileIdentifier.replace(/\.md$/, "");
-  const filePath = path.join(postsDirectory, `${postSlug}.md`);
-  const fileContent = fs.readFileSync(filePath, "utf-8");
-  const { data, content } = matter(fileContent);
-
-  const postData = {
-    slug: postSlug,
-    ...(data as IPost),
-    content,
-  };
-  return postData;
+const downloadPosts = async ():Promise<PostName[]> => {
+  const posts = await listAll(blogpostRef);
+  const postsData = await Promise.all(
+    posts.items.map(async (postRef) => {
+      return { name: postRef.name };
+    })
+  );
+  return postsData;
 };
 
-export const getAllPosts = (): IPost[] | void => {
-  const postFiles = fs.readdirSync(postsDirectory);
-  if (!postFiles) {
-    console.log("No posts found!");
-    return;
-  }
-  const allPosts = postFiles.map((postFile) => {
-    return getPostData(postFile);
+export const getPostData = async (fileIdentifier: PostName) => {
+  const postRef = ref(blogpostRef, fileIdentifier.name);
+  const postUrl = await getDownloadURL(postRef);
+  const fileContent = await new Promise<string>((resolve, reject) => {
+    https.get(postUrl, (res) => {
+      let body: string;
+      res.on("data", (chunk) => {
+        body += chunk;
+        body = body.replace("undefined", "");
+      });
+
+      res.on("end", () => {
+        resolve(body);
+      });
+    });
   });
+  const { data, content } = matter(fileContent);
+  const postData = data as IPost;
+  const imageRef = ref(blogcoverimgRef, postData.image);
+  const imageUrl = await getDownloadURL(imageRef);
+
+  const post = {
+    slug: fileIdentifier.name,
+    ...postData,
+    content,
+    image: imageUrl,
+  };
+  return post;
+};
+
+export const getAllPosts = async (): Promise<IPost[]> => {
+  const postsList = await downloadPosts();
+  if (!postsList) {
+    console.log("No posts found!");
+    return [];
+  }
+  const allPosts = await Promise.all(
+    postsList.map((post) => {
+      return getPostData(post);
+    })
+  );
 
   const sortedPosts = allPosts.sort(
     (postA: IPost | void, postB: IPost | void) => {
@@ -48,8 +77,8 @@ export const getAllPosts = (): IPost[] | void => {
   return sortedPosts;
 };
 
-export const getFeaturedPosts = () => {
-  const allPosts = getAllPosts();
+export const getFeaturedPosts = async () => {
+  const allPosts = await getAllPosts();
   if (!allPosts) {
     return console.log("No posts found");
   }

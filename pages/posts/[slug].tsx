@@ -1,7 +1,8 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import PostContent from "../../components/Posts/post-detail/post-content";
-import { getPostData, IPost } from "../../lib/posts-util";
+import { getAllPosts, getPostData } from "../../lib/posts-util";
 import styles from "../../styles/PostDetail.module.css";
+import { IPost } from "../../utils/types";
 
 const PostDetailPage: NextPage<{ postData: IPost }> = (props) => {
   return (
@@ -14,8 +15,10 @@ const PostDetailPage: NextPage<{ postData: IPost }> = (props) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
+  const posts = await getAllPosts();
+  const paths = posts.map((post)=>{return {params:{slug:post.slug}}})
   return {
-    paths: [{ params: { slug: "getting-started with nextJs" } }],
+    paths: paths,
     fallback: "blocking",
   };
 };
@@ -23,7 +26,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async (context) => {
   const { params } = context;
   const { slug } = params;
-  const postData = getPostData(slug as string);
+  const postData = await getPostData({name:slug as string});
   return {
     props: {
       postData,

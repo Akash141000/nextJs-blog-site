@@ -1,9 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import React from "react";
-import { NextComponentType } from "next";
 import styles from "./post-item.module.css";
-import { IPost } from "../../lib/posts-util";
+import { IPost } from "../../utils/types";
 
 interface IPostItemProps {
   post: IPost;
@@ -18,7 +17,6 @@ const PostItem = (props: IPostItemProps) => {
     year: "numeric",
   });
 
-  const imagePath = `/images/posts/${slug}/${image}`;
   const linkHref = `/posts/${slug}`;
 
   return (
@@ -28,7 +26,7 @@ const PostItem = (props: IPostItemProps) => {
           <div>
             <Image
               alt={title}
-              src={imagePath}
+              src={image}
               width={300}
               height={200}
               layout="responsive"

@@ -1,22 +1,20 @@
 import PostHeader from "./post-header";
 import ReactMarkdown, { Components } from "react-markdown";
-import { IPost } from "../../../lib/posts-util";
+import { IPost } from "../../../utils/types";
 
 const PostContent: React.FC<{ post: IPost }> = (props) => {
-  const imagePath = `/images/posts/${props.post.slug}/${props.post.image}`;
 
   const renderers: Components = {
     ul: ({node, ...props}) => {
       return (
-        <ul className="list-disc m-5" {...props}>          
-          </ul>
+        <ul className="list-disc m-5" {...props}  />
       );
     },
   };
 
   return (
     <article>
-      <PostHeader title={props.post.title} image={imagePath} />
+      <PostHeader title={props.post.title} image={props.post.image} />
       <ReactMarkdown
       components={renderers}
         children={props.post.content}

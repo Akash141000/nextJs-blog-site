@@ -1,9 +1,8 @@
-import Main from "../../components/UI/main";
-import Layout from "../../components/UI/layout";
 import PostsGrid from "../../components/Posts/posts-grid";
 import styles from "../../styles/AllPosts.module.css";
 import { GetStaticProps, NextPage } from "next";
-import { getFeaturedPosts, IPost } from "../../lib/posts-util";
+import { getFeaturedPosts } from "../../lib/posts-util";
+import { IPost } from "../../utils/types";
 
 const AllPosts: NextPage<{ posts: IPost[] }> = (props) => {
   return (
@@ -21,7 +20,7 @@ const AllPosts: NextPage<{ posts: IPost[] }> = (props) => {
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  const featuredPosts = getFeaturedPosts();
+  const featuredPosts =await getFeaturedPosts();
   return {
     props: {
       posts: featuredPosts,
